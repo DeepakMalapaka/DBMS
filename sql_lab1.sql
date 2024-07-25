@@ -1,5 +1,4 @@
-create table student(rollno number(5) primary key, name varchar(20), age
-number(2),bname varchar(5),perc number(5,2));
+create table student(rollno number(5) primary key, name varchar(20), agenumber(2),bname varchar(5),perc number(5,2));
 insert into student values(520, 'HARI', 18, 'CSE', 76.5);
 insert into student values(420, 'ANIL', 19, 'ECE', 66.8);
 insert into student values(304, 'KUMAR', 18, 'MECH', 69.5);
