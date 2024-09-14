@@ -128,3 +128,8 @@ where deptno in (select distinct deptno
     			group by deptno
     			having count(*)>=1);
 -- 34) Display all employees those who are not managers.
+select *
+from emp
+where empno not in(select e1.empno 
+    				from emp e1,emp e2
+    				where e1.empno=e2.empno);
