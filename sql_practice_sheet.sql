@@ -35,7 +35,7 @@ SELECT COUNT(*) FROM emp;
 -- 5) Display emp table with salary descending order.
 SELECT * FROM emp order by sal desc;
 -- 6) Display first five records in employee table.
-
+select * from emp where rownum<=5;
 -- 7) Display all the records in emp table order by ascending deptno, descending salary
 SELECT * FROM emp order by deptno asc,sal desc;
 -- 8) Display all employees those who were joined in year 1981.
@@ -48,7 +48,7 @@ SELECT * FROM emp where MGR in ('7698','7566') and sal>1500;
 -- 11) Display all employees where their salary is less then the Ford’s salary?
 SELECT * FROM emp where sal< (SELECT sal FROM EMP where ename='FORD');
 -- 12) Display all the records in EMP table along with the row Id
-
+select rowId,emp.* from emp;
 -- 13) Write a query to display current date.
 
 -- 14) Display distinct job from emp table.
@@ -134,7 +134,7 @@ where empno not in(select e1.empno
     				from emp e1,emp e2
     				where e1.empno=e2.empno);
 -- 35) Display ename, deptno from emp table with format of {ename} belongs to {deptno}
-select ename,deptno
+select concat(concat(ename,' belongs to '),deptno) as OUTPUT
 from emp;
 -- 36) Display all the records in emp table. The ename should be lower case. The job first character should be upper case and rest of the character in job field should be lower case.
 select lower(ename),concat(upper(substr(job,1,1)),lower(substr(job,2))) 
