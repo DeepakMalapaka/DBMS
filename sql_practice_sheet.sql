@@ -133,3 +133,64 @@ from emp
 where empno not in(select e1.empno 
     				from emp e1,emp e2
     				where e1.empno=e2.empno);
+-- 35) Display ename, deptno from emp table with format of {ename} belongs to {deptno}
+select ename,deptno
+from emp;
+-- 36) Display all the records in emp table. The ename should be lower case. The job first character should be upper case and rest of the character in job field should be lower case.
+select lower(ename),concat(upper(substr(job,1,1)),lower(substr(job,2))) 
+from emp;
+-- 37) Create table emp1 and copy the emp table for deptno 10 while creating the table
+create table emp1 as 
+select *
+from emp
+where deptno=10;
+select * from emp1;
+-- 38) Create table emp2 with same structure of emp table. Do not copy the data
+create table emp2 as
+select *
+from emp;
+select * from emp2;
+-- 39) Display all the records for deptno which belongs to employee name JAMES.
+select * from emp where ename='JAMES';
+-- 40) Display all the records in emp table where salary should be less than or equal to ADAMS salary
+select * from emp where sal<=(select sal from emp where ename='ADAMS');
+-- 41) Display all subordinate those who are working under BLAKE.
+select * from emp where mgr=(select empno from emp where ename='BLAKE');
+-- 42) Display who is making highest commission.
+select * from emp where comm=(select max(comm) from emp);
+-- 43) Display ename, sal, grade, dname, loc for each employee.
+select ename, sal, dname, loc from emp natural join dept;
+-- 44) Display all employee whose location is DALLAS.
+select * from emp natural join dept where loc='DALLAS';
+-- 45) Delete emp records for detpno 10 and 20.
+delete from emp where deptno=10 or deptno=20;
+-- 46) Delete all employees those are not getting any commission.
+delete from emp where comm is null;
+-- 47) Delete the employees where employee salary is greater than average salary of his/her department.
+delete from emp where sal>(select avg(sal) from emp group by deptno);
+-- 48) Rename the employee name JONES to ANDY
+update emp
+set ename='ANDY'
+where ename='JONES';
+-- 49) Increase the salary 5% for employee those who are earning commission less then 1000
+update emp 
+set sal=(sal*(0.05)+sal)
+where comm<1000;
+-- 98) Increase 100$ for employee who is making more then averge salary of his department.
+update emp
+set sal=(sal+100)
+where sal>(select avg(sal)
+            from emp
+            group by deptno);
+-- 99) Increase 1% salary for employee who is making lowest salary in dept 10
+update emp 
+set sal=(sal*(0.01)+sal)
+where sal=(select min(sal)
+            from emp
+            where deptno=10);
+-- 100) Increase commission 10$ for employees those who are located in NEW YORK.
+update emp
+set comm=(comm+10)
+where deptno=(select deptno
+                from dept
+                where loc='NEW YORK');
