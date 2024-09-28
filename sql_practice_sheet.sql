@@ -132,7 +132,7 @@ select *
 from emp
 where empno not in(select e1.empno 
     				from emp e1,emp e2
-    				where e1.empno=e2.empno);
+    				where e1.mgr=e2.empno);
 -- 35) Display ename, deptno from emp table with format of {ename} belongs to {deptno}
 select concat(concat(ename,' belongs to '),deptno) as OUTPUT
 from emp;
